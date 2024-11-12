@@ -12,13 +12,12 @@ function Responses() {
     const GetFormList=async ()=>{
         const result=await db.select().from(JsonForms)
         .where(eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress));
-         console.log(result);
+        
          setFormList(result)
         
        }
        useEffect(()=>{
        user&&GetFormList()
-       console.log(formList)
        },[user])
   return (
     <div className='p-10 '>

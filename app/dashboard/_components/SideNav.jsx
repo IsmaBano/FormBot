@@ -49,8 +49,11 @@ GetFormList()
     .orderBy(desc(JsonForms.id));
     //  console.log(result);
     setformlist(result)
-    const val=(result.length/3)*100
-  console.log("val",val)
+    let val=(result.length/3)*100
+    while(val>100){
+        val=val/100;
+    }
+ 
     setper(val);
    }
 

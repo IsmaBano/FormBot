@@ -13,6 +13,8 @@ function FormListItemResp({ jsonForm, formRecord }) {
   useEffect(()=>{
        getResponseCount(formRecord.id)
   },[formRecord.id])
+
+  
   async function getResponseCount(formId) {
     try {
       const result = await db
@@ -21,17 +23,17 @@ function FormListItemResp({ jsonForm, formRecord }) {
         })
         .from(userResponses)
         .where(eq(userResponses.formRef, formId));
-   console.log("kya kami h ",result)
-      // Check if result is not empty and set count
+   console.log("result ",result)
+      
       if (result && result[0]) {
         setCount(result[0]?.count || 0);  // Safely access the count
       } else {
         console.log('No responses found for this form.');
-        setCount(0); // Default count if no responses
+        setCount(0); 
       }
     } catch (error) {
       console.log('Error fetching response count:', error);
-      setCount(0); // Handle any potential errors gracefully
+      setCount(0); 
     }
   }
   const exportData = async () => {
@@ -40,9 +42,9 @@ function FormListItemResp({ jsonForm, formRecord }) {
     const result=await db.select().from(userResponses)
     .where(eq(userResponses.formRef, formRecord.id))
   
-     console.log("result",result);
+     console.log("export data result",result);
      
-      len=result.length
+      const len=result.length
      if(result){
       result.forEach((item)=>{
       const jsonItem=JSON.parse(item.jsonResponse)
