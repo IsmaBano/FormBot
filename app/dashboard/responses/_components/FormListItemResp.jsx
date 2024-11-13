@@ -14,28 +14,28 @@ function FormListItemResp({ jsonForm, formRecord }) {
        getResponseCount(formRecord.id)
   },[formRecord.id])
 
-  
-  async function getResponseCount(formId) {
+
+   async function getResponseCount(formId) {
     try {
-      const result = await db
-        .select({
-          count: db.fn.count().as('responseCount'),
-        })
-        .from(userResponses)
-        .where(eq(userResponses.formRef, formId));
-   console.log("result ",result)
-      
-      if (result && result[0]) {
-        setCount(result[0]?.count || 0);  // Safely access the count
-      } else {
-        console.log('No responses found for this form.');
-        setCount(0); 
+      if (!formId) {
+        console.error("Invalid formId provided.");
+        setCount(0);
+        return;
       }
+      const ans=await db.select().from(userResponses)
+      .where(eq(userResponses?.formRef, formId));
+     
+        
+      const len=ans.length;
+      
+      setCount(len);
     } catch (error) {
       console.log('Error fetching response count:', error);
-      setCount(0); 
+      setCount(0);
     }
   }
+
+
   const exportData = async () => {
     let jsonData=[];
     setloading(true)
@@ -72,7 +72,7 @@ function FormListItemResp({ jsonForm, formRecord }) {
       <h2 className='text-sm '>{jsonForm?.formHeading}</h2>
       <hr className='my-4'></hr>
       <div className='flex gap-2 justify-between'>
-        <h2 className='text-sm'> <strong>{count}</strong> Response</h2>
+        <h2 className='text-sm'> <strong>{count}</strong> Responses</h2>
         <Button className="!bg-[#AF1740] hover:!bg-[#f77497]"
           onClick={() => exportData()}
         >{loading ? <Loader className='animate-spin' /> : 'Export'}</Button>
