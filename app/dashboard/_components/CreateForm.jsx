@@ -17,7 +17,7 @@ import moment from "moment/moment";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-const PROMPT = ".On the basis of description please give  formTitle, formHeading,along with fieldName,fieldTitle, placeholder, fieldLabel, fieldType, and field required for each field type in valid JSON format only not in text form whic should not contain any comments or double inverted comma or ivalid symbols inside text which are not accepted in json.";
+const PROMPT = ".On the basis of description please give  formTitle, formHeading,along with fieldName,fieldTitle, placeholder, fieldLabel,required and fieldType for each field type in valid JSON format only not in text form whic should not contain any comments or double inverted comma or ivalid symbols inside text which are not accepted in json. For Select field type give options without any label and all ,just ony option";
 
 function CreateForm() {
   const [opendialog, setOpendialog] = useState(false);
