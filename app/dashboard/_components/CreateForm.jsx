@@ -17,7 +17,8 @@ import moment from "moment/moment";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-const PROMPT = ".On the basis of description please give  formTitle, formHeading,along with fieldName,fieldTitle, placeholder, fieldLabel,required and fieldType for each field type in valid JSON format only not in text form whic should not contain any comments or double inverted comma or ivalid symbols inside text which are not accepted in json. For Select field type give options without any label and all ,just ony option";
+// const PROMPT = ".On the basis of description please give  formTitle, formHeading,along with fieldName,fieldTitle, placeholder, fieldLabel,required and fieldType for each field type in valid JSON format only not in text form whic should not contain any comments or double inverted comma or ivalid symbols inside text which are not accepted in json. For Select field type give options without any label and all ,just ony option";
+const PROMPT=",On Basis of description create JSON form with formTitle, formHeading along with fieldName, fieldTitle,fieldType, placeholder, fieldLabel , required fields, and checkbox and select field type options will be in array only .JSON form should be in valid JSON format only not in text form and should not contain any comments or double inverted comma or apostrophe inside within words or invalid symbols inside text which are not accepted in json and  it should be in pure JSON format."
 
 function CreateForm() {
   const [opendialog, setOpendialog] = useState(false);
@@ -30,20 +31,21 @@ function CreateForm() {
     try {
       const result = await chatSession.sendMessage(`Description: ${input} ${PROMPT}`);
       console.log("Initial result:", result);
+      console.log(result.response.text());
   
-      // Extract and parse JSON from the response
-      // let responseData;
-      let textResponse
+      let textResponse;
       if (typeof result.response.text === 'function') {
-         textResponse = await result.response.text();
+        textResponse = await result.response.text();
         textResponse = textResponse
-        .replace(/```json|```/g, '')
-        .replace(/'/g, '"')
-        .trim();
+          .replace(/```json|```/g, '')  
+          .trim();
+          
+       
+        textResponse = textResponse.replace(/\\"/g, '"'); // If any backslash escape issues occur
+    
         console.log("Text responseData:", textResponse);
       }
   
-      // Insert into the database if parsing was successful
       if (textResponse) {
         const resp = await db.insert(JsonForms)
           .values({

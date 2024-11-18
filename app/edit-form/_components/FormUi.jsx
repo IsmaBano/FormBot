@@ -124,7 +124,7 @@ const handlecheckboxchange=(fieldName,itemName,value)=>{
                     }
                   </RadioGroup>
                 </div>:
-                field.fieldType=="checkbox"?<div className='my-3 w-full'>
+                field.fieldType=="checkbox"?<div key={index} className='my-3 w-full'>
                   <label className='text-xs text-gray-500'>
                     {field?.label}
                   </label>
