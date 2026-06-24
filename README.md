@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+AI Form Builder SaaS
+This is a Next.js-powered SaaS application that allows users to generate professional forms in seconds using AI prompts.
+Users can customize their forms with various themes, backgrounds, and styles, share them via unique URLs, and manage form responses with export capabilities.
 
-## Getting Started
 
-First, run the development server:
+🚀 Features
+AI Form Generation: Create full forms (titles, fields, and placeholders) simply by writing a prompt like "student coding workshop registration".
+Dynamic Form Editor:
+Edit field labels and placeholders.
+Add or delete form fields.
+Select from multiple Daisy UI themes (e.g., Aqua, Bumblebee, Retro).
+Apply gradient backgrounds and custom border styles.
+Form Management: Dashboard to view, edit, share, or delete your created forms.
+Response Handling:
+Live shareable form links for public submission.
+View collected responses and export them to Excel (.xlsx).
+Advanced Authentication:
+Secure sign-in/up via Clerk with social login support (Google, Facebook, etc.).
+Optional Social Authentication requirement for form respondents.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🛠️ Tech Stack
+Framework: Next.js (App Router).
+Language: JavaScript.
+AI Engine: Google Gemini API.
+Database & ORM: PostgreSQL (Neon DB) with Drizzle ORM.
+Styling: Tailwind CSS.
+UI Components: Shadcn UI and Daisy UI.
+Authentication: Clerk.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+⚙️ Prerequisites
+Before you begin, ensure you have the following accounts and API keys:
+Clerk Account: For authentication keys.
+Google AI Studio: For the Gemini API key.
+Neon Console: For the PostgreSQL connection string.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+🛠️ Installation & Setup
+Clone the repository:
+Install dependencies:
+Configure Environment Variables: Create a .env.local file in the root directory and add the following keys:
+Sync the Database Schema: Push the Drizzle schema to your Neon PostgreSQL instance:
+Run the Development Server:
+Open http://localhost:3000 to see the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📜 Available Scripts
+npm run dev: Runs the app in development mode.
+npm run DB push: Syncs your local Drizzle schema with the remote database.
+npm run DB studio: Opens the Drizzle Studio GUI to manage your database records.
+
+You can visit live project at https://form-bot-nine.vercel.app/
+📁 Project Structure
+/app: Contains the Next.js App Router pages and layouts.
+/app/_components: Shared UI components like the Header and Hero section.
+/configs: Database connection (Drizzle) and AI model configurations.
+/configs/schema.js: PostgreSQL table definitions (Forms and Responses).
+/public: Assets like logos and icons.
